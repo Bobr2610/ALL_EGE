@@ -80,11 +80,84 @@
 #     m = max(f(n), m)
 # print(m)
 
-from ipaddress import *
+# from ipaddress import *
 
-net = ip_network('112.208.0.0/255.255.128.0', 0)
-cnt = 0
+# net = ip_network('112.208.0.0/255.255.128.0', 0)
+# cnt = 0
 
-for ip in net:
-    if bin(int(ip))[2:].count('1') % 5:cnt+=1
-print(cnt)
+# for ip in net:
+#     if bin(int(ip))[2:].count('1') % 11:cnt+=1
+# print(cnt)
+
+# def f(n, h):
+#     s = 0
+#     while n > 0:
+#         if n % h > 9:
+#             s += 1
+#         n //= h
+#     return s
+
+# a = 4 * 3125 ** 2019 + 3 * 625 ** 2020 - 2 * 125 ** 2021 - 4 * 5 ** 2023 - 2024
+# print(f(a, 25))
+
+# def f(a):
+#     for x in range(500):
+#         d = int((not (x%a==0)) <= ((x%28==0)<=(not (x%49==0)))) == 1
+#         if not d:
+#             return False
+#     return True
+
+
+# for A in range(1, 10000):
+#     if f(A):
+#         print(A)
+
+# def f(n):
+#     if n <= 3:
+#         return 2025
+#     return 3 * (n - 1) * f(n - 2)
+
+# print(f(2027)/f(2023))
+# print(3 * (2024-1) * 3 * (2022-1))
+# print(f(2027-4)/f(2023))
+
+# a = []
+# with open('/home/student/Рабочий стол/w/05_05_2024/2_17.txt') as file:
+#     f = file.readlines()
+#     f = [str(int(i)) for i in f]
+#     m = -99999
+#     for j in f:
+#         if j[-2::] == 21:
+#             m = max(int(j), m)
+#     m = m**2
+#     for i in range(len(f)-1):
+#         t1 = (int(f[i][-2::] == '21' and len(f[i]) == 5) + int(f[i+1][-2::]) == '21' and len(f[i]) == 5) == 1
+#         if (int(f[i]) ** 2 + int(f[i+1]) ** 2) > m:
+#             a.append(int(f[i]) + int(f[i+1]))
+# print(len(a), max(a))
+
+g_o = 435
+
+def f(x1, c, pob):
+    if x1 >= g_o or c > max(pob):
+        return c in pob
+    moves = [f(x1 + 5, c+1, pob), f(x1 * 3, c+1, pob)]
+    if c % 2 == max(pob)%2:
+        return all(moves)
+    else:
+        return any(moves)
+    
+print('\n#19')
+for s in range(1, 434+1):
+    if not f(s, 0, [1]) and f(s, 0, [2]):
+        print(s)
+        break
+print('\n#20')
+for s in range(1, 434+1):
+    if not f(s, 0, [1]) and f(s, 0, [3]):
+        print(s)
+print('\n#21')
+for s in range(1, 434+1):
+    if f(s, 0, [2, 4]) and not f(s, 0, [2]):
+        print(s)
+        break
